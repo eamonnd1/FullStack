@@ -3,7 +3,7 @@ import ReviewsDAO from "../dao/ReviewsDAO.js";
 export default class reviewsCtrl {
     static async apiPostReview(req, res, next) {
         try{
-            const movieId = req.body.moveId;
+            const movieId = parseInt(req.body.moveId);
             const review = req.body.review;
             const user = req.body.user;
     
@@ -18,7 +18,7 @@ export default class reviewsCtrl {
         }
     }
 
-    static async apiGetreview(req, res, next) {
+    static async apiGetReview(req, res, next) {
         try{
             let id = req.params.is || {}
             let review = await ReviewsDAO.getReview(id)

@@ -1,5 +1,5 @@
 import app from "./server.js";
-import mongodb from "mongodb"
+import mongodb from "mongodb";
 import * as dotenv from "dotenv";
 //import reviewsDAO from "./dao/reviewsDAO.js";
 dotenv.config()
@@ -21,7 +21,7 @@ MongoClient.connect(
     console.error(err.stack);
     process.exit(1);
 }).then(async client => {
-    await ReviewsDAO.injectDB(client)
+    //await ReviewsDAO.injectDB(client)
     app.listen(port, () => {
         console.log(`listening on port ${port}`)
     })
