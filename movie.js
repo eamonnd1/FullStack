@@ -1,17 +1,21 @@
-const APILINK = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=f7186fb3a805c664cbd472eeccf9bbdf&page=1';
-const IMG_PATH = 'https://image.tmdb.org/t/p/w1280';
-const SEARCHAPI = "https://api.themoviedb.org/3/search/movie?&api_key=f7186fb3a805c664cbd472eeccf9bbdf&query=";
+const url = new URL(location.href);
+const movieId = url.searchParams.get("id");
+const movieTitle = url.searchParams.get("title");
+
+const APILINK = 'https://localhost:8000/api/v1/reviews/';
 
 const main = document.getElementById("section");
-const form = document.getElementById("form");
-const search = document.getElementById("query");
+const title = document.getElementById("title");
 
-returnMovies(APILINK)
-function returnMovies(url){
-    fetch(url).then(res => res.json())
+title.innerText = movieTitle;
+
+returnReviews(APILINK)
+
+function returnReviews(url){
+    fetch(url + "movie/" + movieId).then(res => res.json())
     .then(function(data){
-        console.log(data.results);
-        data.results.forEach(element => {
+        console.log(data);
+        data.forEach(element => {
             const div_card = document.createElement('div');
             div_card.setAttribute('class', 'card');
             const div_row = document.createElement('div');
@@ -25,8 +29,7 @@ function returnMovies(url){
             title.setAttribute('id', 'title');
             const centre = document.createElement('centre');
 
-            title.innerHTML = `<span id='revlink'>${element.title}<br> <a href="movie.html?id=${element.id}&title=${element.title}">reviews</a>
-            </span>`;
+            title.innerHTML = `${element.title}`;
             image.src = IMG_PATH + element.poster_path;
 
             centre.appendChild(image);
@@ -38,15 +41,3 @@ function returnMovies(url){
         });
     });
 }
-
-form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    main.innerHTML = ''
-
-    const searchItem = search.value;
-
-    if (searchItem) {
-        returnMovies(SEARCHAPI + searchItem);
-        search.value = "";
-    }
-});

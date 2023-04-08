@@ -5,6 +5,7 @@
 body {
     background-color: #131720;
     font-family: sans-serif;
+    color: white;
 }
 
 h3 {
@@ -74,4 +75,27 @@ input {
     white-space: nowrap;
     overflow: hidden;
     background-color: #151f30;
+}
+
+#revlink {
+    color: #fff;
+    font-size: 18px;
+}
+
+#revlink a:link {
+    font-style: normal;
+    color: #fff;
+    font-size: 16px;
+}
+
+#revlink a:visited{
+    font-style: normal;
+    color: gray;
+    font-size: 16px;
+}
+
+#revlink a:hover{
+    font-style: normal;
+    color:greenyellow;
+    font-size: 16px;
 }
