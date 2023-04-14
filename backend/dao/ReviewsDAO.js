@@ -6,19 +6,21 @@ let reviews
 export default class ReviewsDAO {
     static async injectDB(conn) {
         if (reviews) {
+            console.log("db conn")
             return
         }
         try {
+            console.log("DB conn aft")
             reviews = await conn.db("reviews").collection("reviews")
         } catch (e) {
-            console.error(`eUnable to establish collection handles in userDAO: ${e}`)
+            console.error(`Unable to establish collection handles in userDAO: ${e}`)
         }
     }
 
-    static async addReview(moveId, user, review) {
+    static async addReview(movieId, user, review) {
         try {
             const reviewDoc = {
-                moveId: moveId,
+                movieId: movieId,
                 user: user,
                 review: review,
             }
@@ -32,9 +34,9 @@ export default class ReviewsDAO {
 
     static async getReview(reviewId) {
         try {
-            return await reviews.findOne({_id: ObjectId(reviewId)})
+            return await reviews.findOne({_id:new ObjectId(reviewId)})
         } catch (e) {
-            console.error(`Unable to get review: ${e}`)
+            console.error(`Getvreview err (reviewId: ${e}`)
             return {error: e}
         }
     }
@@ -55,7 +57,7 @@ export default class ReviewsDAO {
 
     static async deleteReview(reviewId,) {
         const deleteResponse = await reviews.deleteOne({
-            _id: ObjectId(reviewId)
+            _id:new ObjectId(reviewId)
         })
 
         return deleteResponse
@@ -64,14 +66,14 @@ export default class ReviewsDAO {
         return {error: e}
     }
 
-    static async getReviewsByMovieId(moveId) {
+    static async getReviewsByMovieId(movieId) {
         try {
             const cursor = await reviews.find({
-                moveId:parseInt(moveId)
+                movieId:parseInt(movieId)
             })
             return cursor.toArray()
         } catch (e) {
-            console.error(`Unable to get review: ${e}`)
+            console.error(`Unable to get review (bymovieid): ${e}`)
             return {error: e}
         }
     }

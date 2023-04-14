@@ -3,7 +3,7 @@ import ReviewsDAO from "../dao/ReviewsDAO.js";
 export default class reviewsCtrl {
     static async apiPostReview(req, res, next) {
         try{
-            const movieId = parseInt(req.body.moveId_);
+            const movieId = parseInt(req.body.movieId_);
             const review = req.body.review;
             const user = req.body.user;
     
@@ -20,15 +20,15 @@ export default class reviewsCtrl {
 
     static async apiGetReview(req, res, next) {
         try{
-            let id = req.params.is || {}
+            let id = req.params.id || {}
             let review = await ReviewsDAO.getReview(id)
             if (!review) {
-                res.status(404).json({error: "Not found"})
+                res.status(404).json({error: "Not found @ getReview"})
                 return
             }
             res.json(review)
         } catch (e) {
-            console.log(`api, ${e}`)
+            console.log(`ctrl GetRev, ${e}`)
             res.status(500).json({error: e})
         }
     }
@@ -73,17 +73,18 @@ export default class reviewsCtrl {
     
     }
 
-    static async apiGetreview(req, res, next) {
+    static async apiGetReviewsByMovieId(req, res, next) {
         try {
             let id = req.params.id || {}
-            let reviews = await ReviewsDAO.getReviewByMovieId(id)
+            console.log("REVbyID")
+            let reviews = await ReviewsDAO.getReviewsByMovieId(id)
             if(!reviews) {
-                res.status(404).json({error: "Not found"})
+                res.status(404).json({error: "Not found @ MovieByID"})
                 return
             }
             res.json(reviews)
         }catch (e) {
-            console.log(`api, ${e}`)
+            console.log(`ctrl revByMovId, ${e}`)
             res.status(500).json({error: e})
         }
     }
