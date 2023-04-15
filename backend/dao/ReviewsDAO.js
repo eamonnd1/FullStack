@@ -19,7 +19,7 @@ export default class ReviewsDAO {
 
     static async addReview(movieId, user, review) {
         try {
-            const reviewDoc = {
+            const reviewDoc = { 
                 movieId: movieId,
                 user: user,
                 review: review,
