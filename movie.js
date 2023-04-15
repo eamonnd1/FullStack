@@ -21,7 +21,9 @@ div_new.innerHTML = `
                 <p><strong>User: </strong>
                     <input type="text" id="new_user" value="" />
                 </p>
-                    <p><a href="#" onclick="saveReview('new_review', 'new_user')">💾</a>
+                    <p><a href="#" onclick="saveReview('new_review', 'new_user')">
+                    <span class="emoji">💾</span>
+                    </a>
                 </p>
             </div>
         </div>
@@ -44,7 +46,10 @@ function returnReviews(url){
                         <p><strong>Review: </strong>${review.review}</p>
                         <p><strong>User: </strong>${review.user}</p>
                         <p><a href="#" onclick="editReview('${review._id}', '${review.review}',
-                        '${review.user}')">✏️</a><a href="#" onclick="deleteReview('${review._id}')">🗑️
+                        '${review.user}')">
+                        <span class="emoji">✏️</a></span>
+                        <a href="#" onclick="deleteButton('${review._id}')">
+                        <span class="emoji">🗑️</span>
                         </a></p>
                     </div>
                 </div>
@@ -68,7 +73,8 @@ function editReview(id, review, user) {
     <p><strong>user: </strong>
         <input type="text" id="${userInputId}" value="${user}">
     </p>
-    <p><a href="#" onclick="saveReview('${reviewInputId}', '${userInputId}', '${id}',)">💾</a>
+    <p><a href="#" onclick="saveReview('${reviewInputId}', '${userInputId}', '${id}',)">
+    <span class="emoji">💾</span></a>
     </p>    
     `
 }
@@ -111,7 +117,11 @@ function deleteReview(id) {
         method: 'DELETE'
     }).then(res => res.json())
     .then(res => {
-        console.log(res)
-        location.reload();
+        console.log(res);
     });
+}
+
+function deleteButton(id) {
+    deleteReview(id);
+    location.reload();
 }

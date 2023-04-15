@@ -98,3 +98,15 @@ input {
     color:greenyellow;
     font-size: 16px;
 }
+
+span.emoji {
+    font-size: 30px;
+}
+
+img.emoji {
+    margin: 0px !important;
+    display: inline !important;
+  
+    height: auto;
+    width: 50px;
+  }
