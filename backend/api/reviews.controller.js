@@ -39,7 +39,7 @@ export default class reviewsCtrl {
             const review = req.body.review
             const user = req.body.user 
 
-            const reviewResponse = await ReviewsDAO.apiUpdateReview(
+            const reviewResponse = await ReviewsDAO.updateReview(
                 reviewId,
                 user,
                 review
@@ -76,7 +76,6 @@ export default class reviewsCtrl {
     static async apiGetReviewsByMovieId(req, res, next) {
         try {
             let id = req.params.id || {}
-            console.log("REVbyID")
             let reviews = await ReviewsDAO.getReviewsByMovieId(id)
             if(!reviews) {
                 res.status(404).json({error: "Not found @ MovieByID"})
