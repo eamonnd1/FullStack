@@ -5,9 +5,9 @@ import ReviewsDAO from "./dao/ReviewsDAO.js";
 dotenv.config()
 
 const MongoClient = mongodb.MongoClient;
-//const mongo_username = process.env.DB_USER;
-//const mongo_password = process.env.DB_PASS;
-const uri = `mongodb+srv://edelaney1992:5pzp112MTVrTCykJ@cluster0.qo1ssuk.mongodb.net/test`
+const mongo_username = process.env.DB_USER;
+const mongo_password = process.env.DB_PASS;
+const uri = `mongodb+srv://${mongo_username}:${mongo_password}@cluster0.qo1ssuk.mongodb.net/test`
 const port = 8000;
 
 MongoClient.connect(
